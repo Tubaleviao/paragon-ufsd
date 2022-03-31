@@ -84,14 +84,14 @@ $(src)$(MODULE_SRC)/$(MODULE_LIBNAME).bin:
 	@@LN_S@ "@UFSD_LIBRARY@" "$(src)$(MODULE_SRC)/$(MODULE_LIBNAME).bin"
 
 clean:
-	@$(MAKE) -C "@KERNEL_SOURCE_DIR@" SUBDIRS="@PWD@" clean 2>&1 > /dev/null
+	@$(MAKE) -C "@KERNEL_SOURCE_DIR@" M="@PWD@" clean 2>&1 > /dev/null
 	@@RM@ -Rf "$(src)$(MODULE_SRC)/$(MODULE_LIBNAME).bin"
 
 -include $(TOPDIR)/Rules.make
 
 
 $(MODULE_NAME).@MODULE_EXT@:
-	$(MAKE) -C "@KERNEL_SOURCE_DIR@" SUBDIRS="@PWD@" O="@KERNEL_BUILD_DIR@" V=1 modules 2>&1
+	$(MAKE) -C "@KERNEL_SOURCE_DIR@" M="@PWD@" O="@KERNEL_BUILD_DIR@" V=1 modules 2>&1
 
 driver:$(MODULE_NAME).@MODULE_EXT@
 	@OBJCOPY_MODULE@
